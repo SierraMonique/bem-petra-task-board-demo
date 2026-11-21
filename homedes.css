@@ -1,0 +1,343 @@
+:root {
+  --bg-board: #f6eadc;
+  --surface: #fffaf3;
+  --surface-alt: #f2e1ce;
+  --surface-hover: #efe0cd;
+  --text-main: #2d1e17;
+  --text-muted: #6f584b;
+  --border-color: #d6bda5;
+  --border-strong: #432b20;
+  --teal: #3f7e8c;
+  --teal-dark: #2c5f6b;
+  --sage: #6a8e58;
+  --brick: #b5453d;
+  --brick-dark: #8f322b;
+  --amber: #d99326;
+  --amber-dark: #b37416;
+  --navy: #334e70;
+  --terracotta: #a85432;
+  --bg-pattern: rgba(196, 152, 108, 0.16);
+
+  --shadow-card: 0 6px 0 rgba(67, 43, 32, 0.16);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+}
+
+[data-theme="dark"] {
+  --bg-board: #1b1614;
+  --surface: #261f1c;
+  --surface-alt: #322824;
+  --surface-hover: #3b302b;
+  --text-main: #f5ebe0;
+  --text-muted: #bba99b;
+  --border-color: #4b3c35;
+  --border-strong: #e2c7a8;
+  --bg-pattern: rgba(217, 147, 38, 0.06);
+
+  --teal: #579fb0;
+  --teal-dark: #3f7e8c;
+  --sage: #84ad6f;
+  --brick: #d65f56;
+  --brick-dark: #b5453d;
+  --amber: #e8a73c;
+  --amber-dark: #c98820;
+
+  --shadow-card: 0 6px 0 rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-board);
+  background-image:
+    radial-gradient(var(--bg-pattern) 2px, transparent 2px),
+    radial-gradient(var(--bg-pattern) 2px, var(--bg-board) 2px);
+  background-size: 36px 36px;
+  background-position: 0 0, 18px 18px;
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.5;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+h1, h2, h3 {
+  font-family: "Fredoka", sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* 3. Strip 8 Kotak Warna Polos di Atas */
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.board-decor-strip{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    border-bottom: 3px solid var(--border-strong);
+}
+.tile {
+  height: 34px;
+  border-right: 2px solid var(--border-strong);
+}
+.tile:last-child { border-right: none; }
+
+.tile-sage { background: var(--sage); }
+.tile-teal { background: var(--teal); }
+.tile-brick { background: var(--brick); }
+.tile-amber { background: var(--amber); }
+.tile-navy { background: var(--navy); }
+.tile-terracotta { background: var(--terracotta); }
+.tile-gold { background: #c58927; }
+.tile-slate { background: #5a6c75; }
+
+.auth-container {
+  flex: 1;
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 20px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 36px;
+  align-items: center;
+}
+
+/* buat border PCU */
+.org-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 2px solid var(--border-strong);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.org-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--sage);
+}
+
+/* efek tulisan */
+.hero-title {
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  line-height: 1.08;
+  margin-bottom: 16px;
+  text-shadow: 2px 2px 0 rgba(67, 43, 32, 0.14);
+}
+/* ksi warna tulisan */
+.word-teal { color: var(--teal); }
+.word-amber { color: var(--amber); }
+.word-brick { color: var(--brick); }
+
+/* 5. Kartu Form Login & Register */
+.board-card {
+  background: var(--surface);
+  border: 2.5px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.auth-card {
+  padding: 26px;
+}
+
+.auth-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.auth-tabs {
+  display: flex;
+  background: var(--surface-alt);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border-strong);
+  flex: 1;
+}
+
+.auth-tab {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.auth-tab.active {
+  background: var(--teal);
+  color: #ffffff;
+}
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border-strong);
+  background: var(--surface-alt);
+  color: var(--text-main);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+}
+
+.auth-form h2 {
+  font-size: 1.45rem;
+  margin-bottom: 4px;
+}
+
+.form-hint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* 6. Input & Tombol */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.86rem;
+  margin-bottom: 5px;
+}
+
+/* tampilan formmm */
+input[type="text"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border-color);
+  background: var(--surface);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.92rem;
+}
+.hero-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 48ch;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+
+input.input-error {
+  border-color: var(--brick);
+}
+
+.error-msg {
+  display: block;
+  color: var(--brick);
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-top: 4px;
+  min-height: 16px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border-strong);
+  cursor: pointer;
+  transition: transform 0.12s ease, background-color 0.15s ease;
+}
+
+.btn:active {
+  transform: translateY(2px);
+}
+.btn-block {
+  width: 100%;
+}
+
+.btn-primary {
+  background: var(--teal);
+  color: #ffffff;
+  box-shadow: 0 3px 0 var(--border-strong);
+}
+.btn-primary:hover {
+  background: var(--teal-dark);
+}
+.btn-amber {
+  background: var(--amber);
+  color: #23170d;
+  box-shadow: 0 3px 0 var(--border-strong);
+}
+.btn-amber:hover {
+  background: var(--amber-dark);
+  color: #ffffff;
+}
+
+.demo-box {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1.5px dashed var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--teal);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.88rem;
+}
+
+/* resposiifns */
+@media (max-width: 820px) {
+  .auth-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .board-decor-strip {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

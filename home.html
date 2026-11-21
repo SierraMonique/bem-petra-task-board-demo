@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEM Petra Task Board — Dare To Act, Make An Impact!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="homedes.css" />
+</head>
+<body>
+  <div id="toast-container" class="toast-container"></div>
+    <!-- HLM login -->
+    <section id="auth-view" class="auth-wrapper">
+    <div class="board-decor-strip">
+      <span class="tile tile-sage"></span>
+      <span class="tile tile-teal"></span>
+      <span class="tile tile-brick"></span>
+      <span class="tile tile-amber"></span>
+      <span class="tile tile-navy"></span>
+      <span class="tile tile-terracotta"></span>
+      <span class="tile tile-gold"></span>
+      <span class="tile tile-slate"></span>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-hero">
+            <div class="org-pill">
+                <span class="org-dot"></span>
+                <span>PETRA CHRISTIAN UNIVERSITY • BEM 2026/2027</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="word-teal">DARE TO ACT,</span><br>
+                <span class="word-amber">MAKE AN</span>
+                <span class="word-brick">IMPACT!</span>
+            </h1>
+            <p class="hero-subtitle">Portal Manajemen Proyek & Tugas Harian Panitia / Intern BEM. Kelola timeline divisi, pantau progres proker, dan selesaikan setiap misi tepat waktu!</p>
+        </div>
+    
+
+    <!-- Kolom Kanan: Kartu Form -->
+     <div class="auth-card board-card">
+        <div class="auth-header-row">
+            <div class="auth-tabs">
+                <button type="button" id="tab-login" class="auth-tab active">Masuk</button>
+                <button type="button" id="tab-register" class="auth-tab">Daftar Akun</button>
+            </div>
+            <button type="button" id="auth-theme-toggle" class="icon-btn" title="Ganti Tema"><span class="theme-icon">🌙</span></button>
+        </div>
+
+        <!-- Form Login -->
+        <form id="login-form" class="auth-form" novalidate>
+            <h2>Selamat Datang Kembali!</h2>
+            <p class="form-hint">Masuk untuk mengakses papan proyek & tugas harianmu.</p>
+            <div class="form-group">
+                <label for="login-email">Email / NRP</label>
+                <input type="text" id="login-email" placeholder="contoh: c14260001@john.petra.ac.id">
+                <small class="error-msg" id="login-email-err"></small>
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" name="" id="login-password" placeholder="Minimal 6 karakter">
+                <small class="error-msg" id="login-password-err"></small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Mulai Langkah (Login)</button>
+            <div class="demo-box">
+            <span>Ingin langsung mencoba?</span>
+            <button type="button" id="fill-demo-btn" class="link-btn">Isi Akun Demo BEM</button>
+          </div>
+        </form>
+
+        <!-- Form Register -->
+         <form id="register-form" class="auth-form hidden" novalidate>
+            <h2>Registrasi Anggota / Intern</h2>
+            <p class="form-hint">Buat akun baru untuk mulai mencatat proyek dan tugas.</p>
+            <div class="form-group">
+                <label for="reg-name">Nama Lengkap</label>
+                <input type="text" name="" id="reg-name" placeholder="Nama lengkap kamu">
+                <small class="error-msg" id="reg-name-err"></small>
+            </div>
+            <div class="form-group">
+                <label for="reg-division">Divisi / Departemen BEM</label>
+                <select name="" id="reg-division">
+                    <option value="IS">IS (Information System)</option>
+                    <option value="HRD">HRD ((Human Resource Development))</option>
+                    <option value="CMD">CMD (Creative Media Department)</option>
+                    <option value="PRP">PRP (Public Relations & Partnership)</option>
+                    <option value="CSD">CSD (Community & Social Development)</option>
+                    <option value="CSI">CSI (Campus & Student Involvement)</option>
+                    <option value="GFAB">GFAB (General Finance Administration Board)</option>
+                    <option value="GSAB">GSAB (General Secretary Administration Board)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="reg-email">Email / NRP</label>
+                <input type="text" id="reg-email"   placeholder="contoh: c14260001@john.petra.ac.id" />
+                <small class="error-msg" id="reg-email-err"></small>
+            </div>
+            <div class="form-group">
+                <label for="reg-password">Kata Sandi</label>
+                <input type="password" id="reg-password" placeholder="Minimal 6 karakter" />
+                <small class="error-msg" id="reg-password-err"></small>
+            </div>
+            <button type="submit" class="btn btn-amber btn-block">Daftar & Masuk</button>
+         </form>
+        </div>
+    </div>
+    </section>
+<script src="home.js"></script>
+</body>
+</html>

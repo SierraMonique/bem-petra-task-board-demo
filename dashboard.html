@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — BEM Petra Task Board</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="homedes.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+    <div id="toast-container" class="toast-container"></div>
+    <!-- top navbar -->
+     <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">
+                <div class="bemdice">🎲</div>
+                <div>
+                    <div class="brand-title">BEM PETRA <span class="brand-year">2026/2027</span></div>
+                    <div class="brand-sub">Dare To Act, Make An Impact!</div>
+                </div>
+            </div>
+            <div class="topbar-actions">
+                <div class="user-chip">
+                    <span class="user-div-tag" id="user-div-tag">CMD</span>
+                    <span class="user-name" id="user-display-name">Panitia Intern BEM</span>
+                </div>
+                <button type="button" id="dash-theme-toggle" class="icon-btn" title="Mode Gelap / Terang">
+                <span class="theme-icon">🌙</span></button>
+                <button type="button" id="logout-btn" class="btn btn-outline-danger btn-sm">Keluar</button>
+            </div>
+        </div>
+     </header>
+    <main class="container">
+        <section class="stats-grid">
+            <div class="stat-card stat-sage">
+                <div class="stat-label">TOTAL PROYEK</div>
+                <div class="stat-value" id="stat-total-projects">0</div>
+                <div class="stat-foot" id="stat-active-projects">0 proyek aktif</div>
+            </div>
+            <div class="stat-card stat-brick">
+                <div class="stat-label">TUGAS TO-DO</div>
+                <div class="stat-value" id="stat-todo">0</div>
+                <div class="stat-foot">Menunggu dikerjakan</div>
+            </div>
+            <div class="stat-card stat-amber">
+                <div class="stat-label">IN-PROGRESS</div>
+                <div class="stat-value" id="stat-progress">0</div>
+                <div class="stat-foot">Sedang berjalan</div>
+            </div>
+            <div class="stat-card stat-teal">
+                <div class="stat-label">TUGAS DONE</div>
+                <div class="stat-value" id="stat-done">0</div>
+                <div class="stat-foot" id="stat-completion-rate">0% selesai</div>
+            </div>
+        </section>
+
+        <div class="workspace-grid">
+            <aside class="projects-panel board-card">
+                <div class="panel-header">
+                    <div>
+                        <span class="pill-tag pill-teal">PAPAN PROKER</span>
+                        <h2>Daftar Proyek</h2>
+                    </div>
+                    <button type="button" id="open-project-modal-btn" class="btn btn-primary btn-sm">+ Proyek</button>
+                </div>
+
+                <button type="button" class="project-select-all active" id="select-all-projects-btn">
+                    <span>Semua Proyek</span>
+                    <span class="count-pill" id="all-tasks-pill">0</span>
+                </button>
+                <div id="projects-list" class="projects-list"></div>
+            </aside>
+
+            <section class="tasks-panel board-card">
+                <div class="panel-header">
+                <div>
+                    <span class="pill-tag pill-amber" id="active-project-badge">SEMUA PROYEK</span>
+                    <h2 id="active-project-title">Semua Tugas Harian</h2>
+                </div>
+                <button type="button" id="open-task-modal-btn" class="btn btn-amber btn-sm">+ Tugas Baru</button>
+                </div>
+
+                <!-- 3 Kolom Kanban -->
+                <div id="kanban-board" class="kanban-grid">
+                <div class="kanban-col">
+                    <div class="kanban-col-header">
+                    <span class="col-dot dot-brick"></span>
+                    <h3>To-do</h3>
+                    <span class="col-count" id="col-count-todo">0</span>
+                    </div>
+                    <div class="kanban-dropzone" id="zone-todo" data-status="To-do"></div>
+                </div>
+
+                <div class="kanban-col">
+                    <div class="kanban-col-header">
+                    <span class="col-dot dot-amber"></span>
+                    <h3>In-Progress</h3>
+                    <span class="col-count" id="col-count-progress">0</span>
+                    </div>
+                    <div class="kanban-dropzone" id="zone-progress" data-status="In-Progress"></div>
+                </div>
+
+                <div class="kanban-col">
+                    <div class="kanban-col-header">
+                    <span class="col-dot dot-teal"></span>
+                    <h3>Done</h3>
+                    <span class="col-count" id="col-count-done">0</span>
+                    </div>
+                    <div class="kanban-dropzone" id="zone-done" data-status="Done"></div>
+                </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- hapuzz -->
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="modal-card modal-sm board-card">
+            <div class="modal-header">
+                <h3 id="confirm-title">Konfirmasi Hapus</h3>
+            </div>
+            <p id="confirm-message" class="modal-body-text">Apakah Anda yakin ingin menghapus item ini?</p>
+            <div class="modal-actions">
+                <button type="button" id="confirm-cancel-btn" class="btn btn-secondary">Batal</button>
+                <button type="button" id="confirm-ok-btn" class="btn btn-danger">Ya, Hapus</button>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal Tambah / Edit Proyek -->
+    <div id="project-modal" class="modal-overlay hidden">
+        <div class="modal-card board-card">
+            <div class="modal-header">
+                <h3 id="project-modal-title">Tambah Proyek Baru</h3>
+                <button type="button" class="close-modal-btn" data-close="project-modal">&times;</button>
+            </div>
+            <form id="project-form" novalidate>
+                <input type="hidden" id="project-id" />
+                <div class="form-group">
+                    <label for="project-name">Nama Proyek / Proker *</label>
+                    <input type="text" id="project-name" placeholder="Contoh: Open Recruitment Intern BEM 2026" />
+                    <small class="error-msg" id="project-name-err"></small>
+                </div>
+                <div class="form-group">
+                    <label for="project-desc">Deskripsi Proyek *</label>
+                    <textarea id="project-desc" rows="3" placeholder="Tujuan singkat proyek..."></textarea>
+                    <small class="error-msg" id="project-desc-err"></small>
+                </div>
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="project-deadline">Tanggal Deadline *</label>
+                        <input type="date" id="project-deadline" />
+                        <small class="error-msg" id="project-deadline-err"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-status">Status Proyek *</label>
+                        <select id="project-status">
+                            <option value="Perencanaan">Perencanaan</option>
+                            <option value="Berjalan" selected>Berjalan</option>
+                            <option value="Selesai">Selesai</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" data-close="project-modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Proyek</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Tambah / Edit Tugas -->
+    <div id="task-modal" class="modal-overlay hidden">
+        <div class="modal-card board-card">
+        <div class="modal-header">
+            <h3 id="task-modal-title">Tambah Tugas Baru</h3>
+            <button type="button" class="close-modal-btn" data-close="task-modal">&times;</button>
+        </div>
+        <form id="task-form" novalidate>
+            <input type="hidden" id="task-id" />
+            <div class="form-group">
+                <label for="task-project-id">Proyek Terkait *</label>
+                <select id="task-project-id"></select>
+                <small class="error-msg" id="task-project-err"></small>
+            </div>
+            <div class="form-group">
+                <label for="task-title">Judul Tugas *</label>
+                <input type="text" id="task-title" placeholder="Contoh: Desain Poster Feed & Story IG" />
+                <small class="error-msg" id="task-title-err"></small>
+            </div>
+            <div class="form-group">
+                <label for="task-desc">Deskripsi Tugas *</label>
+                <textarea id="task-desc" rows="3" placeholder="Detail pekerjaan..."></textarea>
+                <small class="error-msg" id="task-desc-err"></small>
+            </div>
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label for="task-deadline">Deadline Tugas *</label>
+                    <input type="date" id="task-deadline" />
+                    <small class="error-msg" id="task-deadline-err"></small>
+                </div>
+                <div class="form-group">
+                    <label for="task-status">Status *</label>
+                    <select id="task-status">
+                        <option value="To-do">To-do</option>
+                        <option value="In-Progress">In-Progress</option>
+                        <option value="Done">Done</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" data-close="task-modal">Batal</button>
+                <button type="submit" class="btn btn-amber">Simpan Tugas</button>
+            </div>
+        </form>
+    </div>
+
+  </div>
+  <script src="dashboard.js"></script>
+</body>
+</html>
